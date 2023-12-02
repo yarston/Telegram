@@ -446,7 +446,8 @@ add_library(${NATIVE_LIB} SHARED
         exoplayer/ffmpeg_jni.cc
         fast-edge.cpp
         genann.c
-        secureid_ocr.cpp)
+        secureid_ocr.cpp
+        DustEffectAnimator.cpp)
 
 target_compile_options(${NATIVE_LIB} PUBLIC
         -ffast-math -Os -funroll-loops -ffast-math -fno-strict-aliasing -fno-math-errno)

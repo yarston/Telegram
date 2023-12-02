@@ -67,7 +67,6 @@ import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import android.text.style.URLSpan;
-import android.util.Log;
 import android.util.Pair;
 import android.util.Property;
 import android.util.SparseArray;
@@ -277,6 +276,7 @@ import org.telegram.ui.Components.ReactedHeaderView;
 import org.telegram.ui.Components.ReactedUsersListView;
 import org.telegram.ui.Components.ReactionTabHolderView;
 import org.telegram.ui.Components.Reactions.ChatSelectionReactionMenuOverlay;
+import org.telegram.ui.Components.Reactions.DustEffectLayout;
 import org.telegram.ui.Components.Reactions.ReactionsEffectOverlay;
 import org.telegram.ui.Components.Reactions.ReactionsLayoutInBubble;
 import org.telegram.ui.Components.ReactionsContainerLayout;
@@ -20875,6 +20875,14 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             if (chatAdapter != null) {
                 int prevLoadingUpRow = chatAdapter.loadingUpRow;
                 int prevLoadingDownRow = chatAdapter.loadingDownRow;
+
+                List<View> messages = new ArrayList<>();
+                for(Integer idx : removedIndexes) {
+                    View message = chatLayoutManager.findViewByPosition(idx);
+                    if(message != null) messages.add(message);
+                }
+                DustEffectLayout.show(ChatActivity.this, messages, ReactionsEffectOverlay.LONG_ANIMATION);
+
                 for (int a = 0, N = removedIndexes.size(); a < N; a++) {
                     chatAdapter.notifyItemRemoved(removedIndexes.get(a));
                 }
